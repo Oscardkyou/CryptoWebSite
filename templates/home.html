@@ -1,0 +1,829 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <style>
+
+        $color-base:#fff;
+$color-text:#222;
+$color-accent: desaturate(navy,80%);
+        @font-face {
+	font-family: raleway_f;
+	src: url(../fonts/raleway-regular.woff2);
+}
+#arrow {
+    color:black;
+}
+@font-face {
+	font-family: raleway_f;
+	src: url(../fonts/raleway-black.woff2);
+	font-weight: 900;
+}
+   body {
+       font-family: raleway_f, sans-serif;
+        width: 100%;
+       overflow-x: hidden;
+   }
+
+
+body {
+  background: #e5e5e5;
+  font-family: 'Lexend Exa', sans-serif;
+
+}
+
+header {
+    margin-top:-1.77%;
+}
+
+@media (max-width: 576px) {
+        header {
+    margin-top:-5%;
+}
+    }
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --fullSize: 100%;
+    --space-xl: 2rem;
+    --space-l: 1.5rem;
+    --space-m: 1.25rem;
+    --space: 1rem;
+    --space-ss: 0.75rem;
+    --space-s: 0.5rem;
+    --space-xs: 0.25rem;
+    --fs-l: 1.4375rem;
+    --fs-m: 1.25rem;
+    --fs-default: 1rem;
+    --fs-s: 0.9rem;
+    --fs-xs: 0.875rem;
+    --clr-default: #fff;
+    --blue-accent100: #528ad3c0;
+    --blue-accent200: #3599;
+    --cyan: hsl(183deg 96% 56%);
+    --anim-time--hi: 266ms;
+    --anim-time--med: 400ms;
+    --anim-time--lo: 600ms;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.color-white {
+  color: #fff;
+}
+
+.box-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 35px 15px;
+  width: 100%;
+}
+
+@media screen and (min-width:1380px) {
+  .box-container {
+    flex-direction: row
+  }
+}
+
+.box-item {
+  position: relative;
+  -webkit-backface-visibility: hidden;
+  width: 315px;
+  margin-bottom: 35px;
+  max-width: 100%;
+}
+
+.flip-box {
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+.flip-box-front,
+.flip-box-back {
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  min-height: 400px;
+  -ms-transition: transform 0.7s cubic-bezier(.4,.2,.2,1);
+  transition: transform 0.7s cubic-bezier(.4,.2,.2,1);
+  -webkit-transition: transform 0.7s cubic-bezier(.4,.2,.2,1);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-box-front {
+  -ms-transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+  -webkit-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.flip-box:hover .flip-box-front {
+  -ms-transform: rotateY(-180deg);
+  -webkit-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
+  -webkit-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.flip-box-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  -ms-transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  -webkit-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.flip-box:hover .flip-box-back {
+  -ms-transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+  -webkit-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.flip-box .inner {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  padding: 60px;
+  outline: 1px solid transparent;
+  -webkit-perspective: inherit;
+  perspective: inherit;
+  z-index: 2;
+
+  transform: translateY(-50%) translateZ(60px) scale(.94);
+  -webkit-transform: translateY(-50%) translateZ(60px) scale(.94);
+  -ms-transform: translateY(-50%) translateZ(60px) scale(.94);
+  top: 50%;
+}
+
+.flip-box-header {
+  font-size: 34px;
+}
+
+.flip-box p {
+  font-size: 20px;
+  line-height: 1.5em;
+}
+
+.flip-box-img {
+  margin-top: 25px;
+  margin-left:30%;
+}
+
+.flip-box-button {
+  background-color: transparent;
+  border: 2px solid #fff;
+  border-radius: 2px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 25px;
+  padding: 15px 20px;
+  text-transform: uppercase;
+}
+
+
+
+
+
+* {
+            border: 0;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            color: var(--primary);
+            transition: color var(--trans-dur);
+            text-decoration: none;
+
+
+        }
+        body {
+            overflow-x: hidden;
+            background-color: #ffffff; /* Белый фон */
+            color: #000000; /* Черный цвет текста */
+        }
+        :root {
+            --hue: 223;
+            --bg: hsl(var(--hue),10%,90%);
+            --fg: hsl(var(--hue),10%,10%);
+            --primary: hsl(var(--hue),90%,50%);
+            --trans-dur: 0.3s;
+            --trans-timing: cubic-bezier(0.65,0,0.35,1);
+
+        }
+
+
+        body,
+
+        h1 {
+            font-size: 2em;
+            margin: 0 0 3rem;
+            padding-top: 1.5rem;
+            text-align: center;
+        }
+        .btn {
+            background-color: black;
+            border-radius: 0.25em;
+            color: black;
+            cursor: pointer;
+            padding: 0.375em 0.75em;
+            transition:
+                background-color calc(var(--trans-dur) / 2) linear,
+                color var(--trans-dur);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .btn:hover {
+            background-color: black;
+        }
+        .btn-group {
+            display: flex;
+            gap: 0.375em;
+            margin-bottom: 1.5em;
+        }
+        .timeline {
+            left: 0;
+
+            width: 100%;
+            max-width: 25em;
+        }
+        .timeline__arrow {
+            background-image: url('https://cdn-icons-png.flaticon.com/512/7893/7893360.png');
+            color:black;
+            border-radius: 0.25em;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-inline-end: 0.25em;
+            outline: transparent;
+            width: 2em;
+            height: 2em;
+            transition:
+                background-color calc(var(--trans-dur) / 2) linear,
+                color var(--trans-dur);
+            -webkit-appearance: none;
+            appearance: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .timeline__arrow:focus-visible,
+        .timeline__arrow:hover {
+            background-color: hsl(var(--hue),10%,50%,0.4);
+        }
+        .timeline__arrow-icon {
+            display: block;
+            pointer-events: none;
+            transform: rotate(-90deg);
+            transition: transform var(--trans-dur) var(--trans-timing);
+            width: 100%;
+            height: auto;
+            stroke: #000000; /* Черный цвет стрелок */
+            color:black;
+        }
+        .timeline__date {
+            font-size: 0.833em;
+            line-height: 2.4;
+        }
+        .timeline__dot {
+            background-color: black;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+            margin: 0.625em 0;
+            margin-inline-end: 1em;
+            position: relative;
+            width: 0.75em;
+            height: 0.75em;
+        }
+        .timeline__item {
+            position: relative;
+            padding-bottom: 2.25em;
+        }
+        .timeline__item:not(:last-child):before {
+            background-color: currentColor;
+            content: "";
+            display: block;
+            position: absolute;
+            top: 1em;
+            left: 2.625em;
+            width: 0.125em;
+            height: 100%;
+            transform: translateX(-50%);
+        }
+        [dir="rtl"] .timeline__arrow-icon {
+            transform: rotate(90deg);
+        }
+        [dir="rtl"] .timeline__item:not(:last-child):before {
+            right: 2.625em;
+            left: auto;
+            transform: translateX(50%);
+        }
+        .timeline__item-header {
+            display: flex;
+        }
+        .timeline__item-body {
+            border-radius: 0.375em;
+            overflow: hidden;
+            margin-top: 0.5em;
+            margin-inline-start: 4em;
+            height: 0;
+        }
+        .timeline__item-body-content {
+            background-color: hsl(var(--hue),10%,50%,0.2);
+            opacity: 0;
+            padding: 0.5em 0.75em;
+            visibility: hidden;
+            transition:
+                opacity var(--trans-dur) var(--trans-timing),
+                visibility var(--trans-dur) steps(1,end);
+        }
+        .timeline__meta {
+            width: 100%;
+        }
+        .timeline__title {
+            font-size: 1.5em;
+            line-height: 1.333;
+        }
+        /* Expanded state */
+        .timeline__item-body--expanded {
+            height: auto;
+        }
+        .timeline__item-body--expanded .timeline__item-body-content {
+            opacity: 1;
+            visibility: visible;
+            transition-delay: var(--trans-dur), 0s;
+        }
+        .timeline__arrow[aria-expanded="true"] .timeline__arrow-icon {
+            transform: rotate(0);
+        }
+
+
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    {% include "components/nav.html" %}
+
+
+
+ <h1 style="text-align: center">Гайды</h1>
+
+  <div class="box-container">
+	<div class="box-item">
+    <div class="flip-box">
+      <div class="flip-box-front text-center" style="background-image: url('https://img.freepik.com/free-photo/billie-dollar-money-background_1150-741.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1712793600&semt=ais');">
+        <div class="inner color-white">
+          <h3 class="flip-box-header">Деньги</h3>
+          <p>Деньги: обмен, стоимость, богатство, средство, измерение, сохранение, перемещение.</p>
+          <img src="https://s25.postimg.cc/65hsttv9b/cta-arrow.png" alt="" class="flip-box-img">
+        </div>
+      </div>
+      <div class="flip-box-back text-center" style="background-image: url('https://img.freepik.com/free-photo/billie-dollar-money-background_1150-741.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1712793600&semt=ais');">
+        <div class="inner color-white">
+          <h3 class="flip-box-header">Деньги</h3>
+          <p></p>
+          <a href="{% url 'money' %}" class="flip-box-button">Читать</a>
+        </div>
+      </div>
+    </div>
+	</div>
+	<div class="box-item">
+    <div class="flip-box">
+      <div class="flip-box-front text-center" style="background-image: url('https://img.freepik.com/free-vector/blockchain-technology-background-vector-in-gradient-blue_53876-112167.jpg');">
+        <div class="inner color-white">
+          <h3 class="flip-box-header">Блокчейн</h3>
+          <p>Децентрализованный реестр.</p>
+          <img src="https://s25.postimg.cc/65hsttv9b/cta-arrow.png" alt="" class="flip-box-img">
+        </div>
+      </div>
+      <div class="flip-box-back text-center" style="background-image: url('https://img.freepik.com/free-vector/blockchain-technology-background-vector-in-gradient-blue_53876-112167.jpg');">
+        <div class="inner color-white">
+          <h3 class="flip-box-header">Блокчейн</h3>
+          <p>Децентрализованный реестр.</p>
+          <a href="{% url 'blockchain' %}" class="flip-box-button">Читать</a>
+        </div>
+      </div>
+    </div>
+	</div>
+	<div class="box-item">
+    <div class="flip-box">
+      <div class="flip-box-front text-center filter-" style="background-image: url('https://img.freepik.com/premium-vector/decentralized-finance-defi-on-dark-blue-background_387612-15.jpg');">
+        <div class="inner color-white">
+          <h3 class="flip-box-header">Defi</h3>
+          <p>Децентрализованные финансы</p>
+          <img src="https://s25.postimg.cc/65hsttv9b/cta-arrow.png" alt="" class="flip-box-img">
+        </div>
+      </div>
+      <div class="flip-box-back text-center" style="background-image: url('https://img.freepik.com/premium-vector/decentralized-finance-defi-on-dark-blue-background_387612-15.jpg');">
+        <div class="inner color-white">
+          <h3 class="flip-box-header">Defi</h3>
+          <p>Децентрализованные финансы</p>
+          <a href="{% url 'defi' %}" class="flip-box-button">Читать</a>
+        </div>
+      </div>
+    </div>
+	</div>
+    <div class="box-item">
+        <div class="flip-box">
+          <div class="flip-box-front text-center filter-" style="background-image: url('https://s.pfst.net/2017.06/526483867567fbde5eff180219eb764d28681e5a0b1a_b.jpg');">
+            <div class="inner color-white">
+              <h3 class="flip-box-header">Монеты</h3>
+              <p>Цифровые активы и их представления.</p>
+              <img src="https://s25.postimg.cc/65hsttv9b/cta-arrow.png" alt="" class="flip-box-img">
+            </div>
+          </div>
+          <div class="flip-box-back text-center" style="background-image: url('https://s.pfst.net/2017.06/526483867567fbde5eff180219eb764d28681e5a0b1a_b.jpg');">
+            <div class="inner color-white">
+              <h3 class="flip-box-header">Монеты</h3>
+              <p>Цифровые активы и их представления.</p>
+              <a href="{% url 'coins' %}" class="flip-box-button">Читать</a>
+            </div>
+          </div>
+        </div>
+        </div>
+</div>
+<div class="box-container">
+	<div class="box-item">
+    <div class="flip-box">
+      <div class="flip-box-front text-center" style="background-image: url('https://cdn.gihub.org/umbraco/media/3988/fx-image.jpeg');">
+        <div class="inner color-white">
+          <h3 class="flip-box-header">Обмены</h3>
+          <p>Обмен активами без посредников.</p>
+          <img src="https://s25.postimg.cc/65hsttv9b/cta-arrow.png" alt="" class="flip-box-img">
+        </div>
+      </div>
+      <div class="flip-box-back text-center" style="background-image: url('https://cdn.gihub.org/umbraco/media/3988/fx-image.jpeg');">
+        <div class="inner color-white">
+          <h3 class="flip-box-header">Обмены</h3>
+          <p>Обмен активами без посредников.</p>
+          <a href="{% url 'exchanges' %}" class="flip-box-button">Читать</a>
+        </div>
+      </div>
+    </div>
+	</div>
+	<div class="box-item">
+    <div class="flip-box">
+      <div class="flip-box-front text-center" style="background-image: url('https://miro.medium.com/max/1400/1*44q8hFmsXZHMANUVM0Sumw.jpeg');">
+        <div class="inner color-white">
+          <h3 class="flip-box-header">Solidity</h3>
+          <p>Языки программирования для смарт-контрактов.</p>
+          <img src="https://s25.postimg.cc/65hsttv9b/cta-arrow.png" alt="" class="flip-box-img">
+        </div>
+      </div>
+      <div class="flip-box-back text-center" style="background-image: url('https://miro.medium.com/max/1400/1*44q8hFmsXZHMANUVM0Sumw.jpeg');">
+        <div class="inner color-white">
+          <h3 class="flip-box-header">Solidity</h3>
+          <p>Языки программирования для смарт-контрактов.</p>
+          <a href="{% url 'solidity' %}" class="flip-box-button">Читать</a>
+        </div>
+      </div>
+    </div>
+	</div>
+	<div class="box-item">
+    <div class="flip-box">
+      <div class="flip-box-front text-center filter-" style="background-image: url('https://www.securities.io/wp-content/uploads/2023/12/Top-10-Blockchain-Programming-Languages-e1701898449879.png');">
+        <div class="inner color-white">
+          <h3 class="flip-box-header">Vyper</h3>
+          <p>Языки программирования для смарт-контрактов.</p>
+          <img src="https://s25.postimg.cc/65hsttv9b/cta-arrow.png" alt="" class="flip-box-img">
+        </div>
+      </div>
+      <div class="flip-box-back text-center" style="background-image: url('https://www.securities.io/wp-content/uploads/2023/12/Top-10-Blockchain-Programming-Languages-e1701898449879.png');">
+        <div class="inner color-white">
+          <h3 class="flip-box-header">Vyper</h3>
+          <p>Языки программирования для смарт-контрактов.</p>
+          <a href="{% url 'vyper' %}" class="flip-box-button">Читать</a>
+        </div>
+      </div>
+    </div>
+	</div>
+    <div class="box-item">
+        <div class="flip-box">
+          <div class="flip-box-front text-center filter-" style="background-image: url('https://kartinki.pics/uploads/posts/2021-07/thumbs/1626159582_56-kartinkin-com-p-bank-fon-krasivo-62.jpg');">
+            <div class="inner color-white">
+              <h3 class="flip-box-header">Банк</h3>
+              <p>Финансовые услуги и операции.</p>
+              <img src="https://s25.postimg.cc/65hsttv9b/cta-arrow.png" alt="" class="flip-box-img">
+            </div>
+          </div>
+          <div class="flip-box-back text-center" style="background-image: url('https://kartinki.pics/uploads/posts/2021-07/thumbs/1626159582_56-kartinkin-com-p-bank-fon-krasivo-62.jpg');">
+            <div class="inner color-white">
+              <h3 class="flip-box-header">Банк</h3>
+              <p>Финансовые услуги и операции.</p>
+
+            </div>
+          </div>
+        </div>
+        </div>
+</div>
+    <hr>
+    <h1 style="text-align: center">Последние посты</h1>
+<div style="display: flex; flex-wrap: nowrap;">
+    <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 5%;">
+     <div id="timeline" class="timeline">
+	{% for post in first_three_posts %}
+        <div class="timeline__item">
+            <div style="color:black;" class="timeline__item-header">
+                <button style="color:black;" class="timeline__arrow" type="button" id="item{{ post.id }}" aria-labelledby="item{{ post.id }}-name" aria-expanded="false" aria-controls="item{{ post.id }}-ctrld" aria-haspopup="true" data-item="{{ post.id }}">
+                    <svg style="color:black;" class="timeline__arrow-icon" viewBox="0 0 24 24" width="24px" height="24px">
+                        <use style="color:black;" href="#arrow" />
+                    </svg>
+                </button>
+                <span class="timeline__dot"></span>
+                <span id="item{{ post.id }}-name" class="timeline__meta">
+
+                    <a style="text-decoration: none; color: black" href="{% url 'post1' post.id %}"><strong class="timeline__title">{{ post.title }}</strong></a>
+                </span>
+            </div>
+            <div class="timeline__item-body" id="item{{ post.id }}-ctrld" role="region" aria-labelledby="item{{ post.id }}" aria-hidden="true">
+                <div class="timeline__item-body-content">
+                    <p class="timeline__item-p">{{ post.description }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+     <div style="margin-left: 5%" id="timeline" class="timeline">
+	{% for post in second_three_posts %}
+        <div class="timeline__item">
+            <div style="color:black;" class="timeline__item-header">
+                <button style="color:black;" class="timeline__arrow" type="button" id="item{{ post.id }}" aria-labelledby="item{{ post.id }}-name" aria-expanded="false" aria-controls="item{{ post.id }}-ctrld" aria-haspopup="true" data-item="{{ post.id }}">
+                    <svg style="color:black;" class="timeline__arrow-icon" viewBox="0 0 24 24" width="24px" height="24px">
+                        <use style="color:black;" href="#arrow" />
+                    </svg>
+                </button>
+                <span class="timeline__dot"></span>
+                <span id="item{{ post.id }}-name" class="timeline__meta">
+
+                    <a style="text-decoration: none; color: black" href="{% url 'post1' post.id %}"><strong class="timeline__title">{{ post.title }}</strong></a>
+                </span>
+            </div>
+
+        </div>
+    {% endfor %}
+</div>
+     <div style="margin-left: 5%" id="timeline" class="timeline">
+	{% for post in third_three_posts %}
+        <div class="timeline__item">
+            <div style="color:black;" class="timeline__item-header">
+                <button style="color:black;" class="timeline__arrow" type="button" id="item{{ post.id }}" aria-labelledby="item{{ post.id }}-name" aria-expanded="false" aria-controls="item{{ post.id }}-ctrld" aria-haspopup="true" data-item="{{ post.id }}">
+                    <svg style="color:black;" class="timeline__arrow-icon" viewBox="0 0 24 24" width="24px" height="24px">
+                        <use style="color:black;" href="#arrow" />
+                    </svg>
+                </button>
+                <span class="timeline__dot"></span>
+                <span id="item{{ post.id }}-name" class="timeline__meta">
+
+                    <a style="text-decoration: none; color: black" href="{% url 'post1' post.id %}"><strong class="timeline__title">{{ post.title }}</strong></a>
+                </span>
+            </div>
+            <div class="timeline__item-body" id="item{{ post.id }}-ctrld" role="region" aria-labelledby="item{{ post.id }}" aria-hidden="true">
+                <div class="timeline__item-body-content">
+                    <p class="timeline__item-p">{{ post.description }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+    </div>
+</div>
+{% include "components/footer.html" %}
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+<script>
+    window.addEventListener("DOMContentLoaded",() => {
+	const ctl = new CollapsibleTimeline("#timeline");
+});
+
+class CollapsibleTimeline {
+	constructor(el) {
+		this.el = document.querySelector(el);
+
+		this.init();
+	}
+	init() {
+		this.el?.addEventListener("click",this.itemAction.bind(this));
+	}
+	animateItemAction(button, ctrld, contentHeight, shouldCollapse) {
+    const expandedClass = "timeline__item-body--expanded";
+    const animOptions = {
+        duration: 300,
+        easing: "cubic-bezier(0.65,0,0.35,1)"
+    };
+
+    if (shouldCollapse) {
+        button.ariaExpanded = "false";
+        ctrld.ariaHidden = "true";
+        ctrld.classList.remove(expandedClass);
+        animOptions.duration *= 2;
+        const collapseAnimation = ctrld.animate([
+            { height: `${contentHeight}px` },
+            { height: "0px" }
+        ], animOptions);
+        collapseAnimation.onfinish = () => {
+            ctrld.style.height = "0px"; // Ensure element stays collapsed after animation finishes
+        };
+    } else {
+        button.ariaExpanded = "true";
+        ctrld.ariaHidden = "false";
+        ctrld.classList.add(expandedClass);
+        const expandAnimation = ctrld.animate([
+            { height: "0px" },
+            { height: `${contentHeight}px` }
+        ], animOptions);
+        expandAnimation.onfinish = () => {
+            ctrld.style.height = "auto"; // Ensure element expands to its full height after animation finishes
+        };
+    }
+}
+	itemAction(e) {
+    const { target } = e;
+    const action = target?.getAttribute("data-action");
+    const item = target?.getAttribute("data-item");
+
+    if (action) {
+        const targetExpanded = action === "expand" ? "false" : "true";
+        const buttons = Array.from(this.el?.querySelectorAll(`[aria-expanded="${targetExpanded}"]`));
+        const wasExpanded = action === "collapse";
+
+        buttons.forEach((button) => {
+            const buttonID = button.getAttribute("data-item");
+            const ctrld = this.el?.querySelector(`#item${buttonID}-ctrld`);
+            const contentHeight = ctrld.firstElementChild?.offsetHeight;
+
+            this.animateItemAction(button, ctrld, contentHeight, wasExpanded);
+        });
+    } else if (item) {
+        const button = this.el?.querySelector(`[data-item="${item}"]`);
+        const expanded = button?.getAttribute("aria-expanded");
+
+        if (!expanded) return;
+
+        const wasExpanded = expanded === "true";
+        const ctrld = this.el?.querySelector(`#item${item}-ctrld`);
+        const contentHeight = ctrld.firstElementChild?.offsetHeight;
+
+        this.animateItemAction(button, ctrld, contentHeight, wasExpanded);
+        }
+    }
+}
+</script>
+        <script>
+    import { GUI } from 'https://cdn.skypack.dev/dat.gui'
+import gsap from 'https://cdn.skypack.dev/gsap@3.11.0'
+const CANVAS = document.querySelector('canvas')
+const CONTEXT = CANVAS.getContext('2d')
+
+gsap.ticker.fps(12);
+
+
+
+const AMOUNT = 24
+const SIZE = 96 / AMOUNT
+
+console.clear()
+
+class GlitterBoard {
+  constructor(el) {
+    this.EL = el
+    this.CANVAS = el.querySelector('canvas')
+    this.CONTEXT = this.CANVAS.getContext('2d')
+    this.HUE = el.dataset?.hue
+    this.init()
+    return this
+  }
+  glitter() {
+    const that = this
+    that.CONTEXT.clearRect(0, 0, that.CANVAS.width, that.CANVAS.width);
+    for (let i = 0; i < Math.pow(AMOUNT, 2); i++) {
+      let x = i % AMOUNT * SIZE
+      let y = Math.floor(i / AMOUNT) * SIZE
+      that.CONTEXT.fillStyle = that.HUE !== undefined ? `hsl(${that.HUE} 80% ${gsap.utils.random(40, 90, 1)}%)` : `hsl(0 0% ${gsap.utils.random(20, 90, 1)}%)`
+      that.CONTEXT.fillRect(x, y, SIZE, SIZE)
+    }
+  }
+  init() {
+    const that = this
+    that.CANVAS.width = that.CANVAS.height = that.CANVAS.offsetWidth
+    that.CONTEXT.fillStyle = `hsl(${that.HUE} 80% 50%)`
+    that.boundGlitter = that.glitter.bind(that)
+    that.EL.addEventListener('pointerenter', that.enable.bind(that))
+    that.EL.addEventListener('pointerleave', that.disable.bind(that))
+  }
+  enable() {
+    const that = this
+    gsap.ticker.add(that.boundGlitter)
+  }
+  disable() {
+    const that = this
+    gsap.ticker.remove(that.boundGlitter)
+  }
+}
+
+const BOARDS = []
+
+const ICONS = document.querySelector('.icons')
+
+document.querySelectorAll('.icon').forEach(Icon => BOARDS.push(new GlitterBoard(Icon)))
+
+const CONFIG = {
+  explode: false
+}
+
+const toggleExplode = () => {
+  const exploded = CONFIG.explode
+  document.body.toggleAttribute('data-exploded')
+  // Enable the boards
+  if (exploded) {
+    BOARDS.forEach(b => b.enable())
+  }
+  if (!exploded) {
+    // Need to tear down the explosion
+    document.body.toggleAttribute('data-imploding')
+    const TRANSITION = ICONS.getAnimations()[0]
+    TRANSITION.onfinish = () => document.body.toggleAttribute('data-imploding')
+  }
+}
+
+
+const CTRL = new GUI();
+
+CTRL.add(CONFIG, 'explode').name('Explode?').onChange(toggleExplode)</script>
+    <script>
+        function onEntry(entry) {
+  entry.forEach(change => {
+    if (change.isIntersecting) {
+     change.target.classList.add('element-show');
+    }
+  });
+}
+
+let options = {
+  threshold: [0.5] };
+let observer = new IntersectionObserver(onEntry, options);
+let elements = document.querySelectorAll('.element-animation');
+
+for (let elm of elements) {
+  observer.observe(elm);
+}
+
+
+
+
+const clearInput = () => {
+  const input = document.getElementsByTagName("input")[0];
+  input.value = "";
+}
+
+const clearBtn = document.getElementById("clear-btn");
+clearBtn.addEventListener("click", clearInput);
+
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

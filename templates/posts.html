@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        * {
+            border: 0;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            overflow-x: hidden;
+            background-color: #ffffff; /* Белый фон */
+            color: #000000; /* Черный цвет текста */
+        }
+        :root {
+            --hue: 223;
+            --bg: hsl(var(--hue),10%,90%);
+            --fg: hsl(var(--hue),10%,10%);
+            --primary: hsl(var(--hue),90%,50%);
+            --trans-dur: 0.3s;
+            --trans-timing: cubic-bezier(0.65,0,0.35,1);
+
+        }
+        .container5 {
+    display: flex;
+    justify-content: center; /* Выравнивание по центру по горизонтали */
+    align-items: center; /* Выравнивание по центру по вертикали */
+
+}
+
+        body,
+        button {
+            color: var(--fg);
+
+        }
+        h1 {
+            font-size: 2em;
+            margin: 0 0 3rem;
+            padding-top: 1.5rem;
+            text-align: center;
+        }
+        .btn {
+            background-color: var(--fg);
+            border-radius: 0.25em;
+            color: var(--bg);
+            cursor: pointer;
+            padding: 0.375em 0.75em;
+            transition:
+                background-color calc(var(--trans-dur) / 2) linear,
+                color var(--trans-dur);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .btn:hover {
+            background-color: hsl(var(--hue),10%,50%);
+        }
+        .btn-group {
+            display: flex;
+            gap: 0.375em;
+            margin-bottom: 1.5em;
+        }
+        .timeline {
+            left: 0;
+
+            width: 100%;
+            max-width: 36em;
+        }
+        .timeline__arrow {
+            background-color: transparent;
+            border-radius: 0.25em;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-inline-end: 0.25em;
+            outline: transparent;
+            width: 2em;
+            height: 2em;
+            transition:
+                background-color calc(var(--trans-dur) / 2) linear,
+                color var(--trans-dur);
+            -webkit-appearance: none;
+            appearance: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .timeline__arrow:focus-visible,
+        .timeline__arrow:hover {
+            background-color: hsl(var(--hue),10%,50%,0.4);
+        }
+        .timeline__arrow-icon {
+            display: block;
+            pointer-events: none;
+            transform: rotate(-90deg);
+            transition: transform var(--trans-dur) var(--trans-timing);
+            width: 100%;
+            height: auto;
+            stroke: #000000; /* Черный цвет стрелок */
+        }
+        .timeline__date {
+            font-size: 0.833em;
+            line-height: 2.4;
+        }
+        .timeline__dot {
+            background-color: currentColor;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+            margin: 0.625em 0;
+            margin-inline-end: 1em;
+            position: relative;
+            width: 0.75em;
+            height: 0.75em;
+        }
+        .timeline__item {
+            position: relative;
+            padding-bottom: 2.25em;
+        }
+        .timeline__item:not(:last-child):before {
+            background-color: currentColor;
+            content: "";
+            display: block;
+            position: absolute;
+            top: 1em;
+            left: 2.625em;
+            width: 0.125em;
+            height: 100%;
+            transform: translateX(-50%);
+        }
+        [dir="rtl"] .timeline__arrow-icon {
+            transform: rotate(90deg);
+        }
+        [dir="rtl"] .timeline__item:not(:last-child):before {
+            right: 2.625em;
+            left: auto;
+            transform: translateX(50%);
+        }
+        .timeline__item-header {
+            display: flex;
+        }
+        .timeline__item-body {
+            border-radius: 0.375em;
+            overflow: hidden;
+            margin-top: 0.5em;
+            margin-inline-start: 4em;
+            height: 0;
+        }
+        .timeline__item-body-content {
+            background-color: hsl(var(--hue),10%,50%,0.2);
+            opacity: 0;
+            padding: 0.5em 0.75em;
+            visibility: hidden;
+            transition:
+                opacity var(--trans-dur) var(--trans-timing),
+                visibility var(--trans-dur) steps(1,end);
+        }
+        .timeline__meta {
+            width: 100%;
+        }
+        .timeline__title {
+            font-size: 1.5em;
+            line-height: 1.333;
+        }
+        /* Expanded state */
+        .timeline__item-body--expanded {
+            height: auto;
+        }
+        .timeline__item-body--expanded .timeline__item-body-content {
+            opacity: 1;
+            visibility: visible;
+            transition-delay: var(--trans-dur), 0s;
+        }
+        .timeline__arrow[aria-expanded="true"] .timeline__arrow-icon {
+            transform: rotate(0);
+        }
+
+
+
+a {
+    text-decoration: none;
+}
+
+    </style>
+</head>
+<body>
+
+    {% include "components/nav.html" %}
+<h1 style="margin-bottom:5%; ;">Результаты поиска для:</h1>
+
+    <div style="margin-left:2%; " class="container5">
+    <svg display="none">
+	<symbol id="arrow">
+		<polyline points="7 10,12 15,17 10" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+	</symbol>
+</svg>
+<div id="timeline" class="timeline">
+	{% for post in current_page %}
+        <div class="timeline__item">
+            <div class="timeline__item-header">
+                <button class="timeline__arrow" type="button" id="item{{ post.id }}" aria-labelledby="item{{ post.id }}-name" aria-expanded="false" aria-controls="item{{ post.id }}-ctrld" aria-haspopup="true" data-item="{{ post.id }}">
+                    <svg class="timeline__arrow-icon" viewBox="0 0 24 24" width="24px" height="24px">
+                        <use href="#arrow" />
+                    </svg>
+                </button>
+                <span class="timeline__dot"></span>
+                <span id="item{{ post.id }}-name" class="timeline__meta">
+                    <a style="text-decoration: none; color: black" href="{% url 'post1' post.id %}"><strong class="timeline__title">{{ post.id }}</strong></a>
+                    <a style="text-decoration: none; color: black" href="{% url 'post1' post.id %}"><strong class="timeline__title">{{ post.title }}</strong></a>
+                </span>
+            </div>
+            <div class="timeline__item-body" id="item{{ post.id }}-ctrld" role="region" aria-labelledby="item{{ post.id }}" aria-hidden="true">
+                <div class="timeline__item-body-content">
+                    <p class="timeline__item-p">{{ post.description }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="btn-group">
+		<button class="btn" type="button" data-action="expand">Все раскрыть</button>
+		<button class="btn" type="button" data-action="collapse">Все закрыть</button>
+	</div>
+</div>
+</div>
+    </div>
+{% include "components/paginator.html" %}
+{% include "components/footer.html" %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script>
+    import { GUI } from 'https://cdn.skypack.dev/dat.gui'
+import gsap from 'https://cdn.skypack.dev/gsap@3.11.0'
+const CANVAS = document.querySelector('canvas')
+const CONTEXT = CANVAS.getContext('2d')
+
+gsap.ticker.fps(12);
+
+
+
+const AMOUNT = 24
+const SIZE = 96 / AMOUNT
+
+console.clear()
+
+class GlitterBoard {
+  constructor(el) {
+    this.EL = el
+    this.CANVAS = el.querySelector('canvas')
+    this.CONTEXT = this.CANVAS.getContext('2d')
+    this.HUE = el.dataset?.hue
+    this.init()
+    return this
+  }
+  glitter() {
+    const that = this
+    that.CONTEXT.clearRect(0, 0, that.CANVAS.width, that.CANVAS.width);
+    for (let i = 0; i < Math.pow(AMOUNT, 2); i++) {
+      let x = i % AMOUNT * SIZE
+      let y = Math.floor(i / AMOUNT) * SIZE
+      that.CONTEXT.fillStyle = that.HUE !== undefined ? `hsl(${that.HUE} 80% ${gsap.utils.random(40, 90, 1)}%)` : `hsl(0 0% ${gsap.utils.random(20, 90, 1)}%)`
+      that.CONTEXT.fillRect(x, y, SIZE, SIZE)
+    }
+  }
+  init() {
+    const that = this
+    that.CANVAS.width = that.CANVAS.height = that.CANVAS.offsetWidth
+    that.CONTEXT.fillStyle = `hsl(${that.HUE} 80% 50%)`
+    that.boundGlitter = that.glitter.bind(that)
+    that.EL.addEventListener('pointerenter', that.enable.bind(that))
+    that.EL.addEventListener('pointerleave', that.disable.bind(that))
+  }
+  enable() {
+    const that = this
+    gsap.ticker.add(that.boundGlitter)
+  }
+  disable() {
+    const that = this
+    gsap.ticker.remove(that.boundGlitter)
+  }
+}
+
+const BOARDS = []
+
+const ICONS = document.querySelector('.icons')
+
+document.querySelectorAll('.icon').forEach(Icon => BOARDS.push(new GlitterBoard(Icon)))
+
+const CONFIG = {
+  explode: false
+}
+
+const toggleExplode = () => {
+  const exploded = CONFIG.explode
+  document.body.toggleAttribute('data-exploded')
+  // Enable the boards
+  if (exploded) {
+    BOARDS.forEach(b => b.enable())
+  }
+  if (!exploded) {
+    // Need to tear down the explosion
+    document.body.toggleAttribute('data-imploding')
+    const TRANSITION = ICONS.getAnimations()[0]
+    TRANSITION.onfinish = () => document.body.toggleAttribute('data-imploding')
+  }
+}
+
+
+const CTRL = new GUI();
+
+CTRL.add(CONFIG, 'explode').name('Explode?').onChange(toggleExplode)</script>
+    <script>
+        function onEntry(entry) {
+  entry.forEach(change => {
+    if (change.isIntersecting) {
+     change.target.classList.add('element-show');
+    }
+  });
+}
+
+let options = {
+  threshold: [0.5] };
+let observer = new IntersectionObserver(onEntry, options);
+let elements = document.querySelectorAll('.element-animation');
+
+for (let elm of elements) {
+  observer.observe(elm);
+}
+
+
+
+
+const clearInput = () => {
+  const input = document.getElementsByTagName("input")[0];
+  input.value = "";
+}
+
+const clearBtn = document.getElementById("clear-btn");
+clearBtn.addEventListener("click", clearInput);
+
+</script>
+<script>
+    window.addEventListener("DOMContentLoaded",() => {
+	const ctl = new CollapsibleTimeline("#timeline");
+});
+
+class CollapsibleTimeline {
+	constructor(el) {
+		this.el = document.querySelector(el);
+
+		this.init();
+	}
+	init() {
+		this.el?.addEventListener("click",this.itemAction.bind(this));
+	}
+	animateItemAction(button, ctrld, contentHeight, shouldCollapse) {
+    const expandedClass = "timeline__item-body--expanded";
+    const animOptions = {
+        duration: 300,
+        easing: "cubic-bezier(0.65,0,0.35,1)"
+    };
+
+    if (shouldCollapse) {
+        button.ariaExpanded = "false";
+        ctrld.ariaHidden = "true";
+        ctrld.classList.remove(expandedClass);
+        animOptions.duration *= 2;
+        const collapseAnimation = ctrld.animate([
+            { height: `${contentHeight}px` },
+            { height: "0px" }
+        ], animOptions);
+        collapseAnimation.onfinish = () => {
+            ctrld.style.height = "0px"; // Ensure element stays collapsed after animation finishes
+        };
+    } else {
+        button.ariaExpanded = "true";
+        ctrld.ariaHidden = "false";
+        ctrld.classList.add(expandedClass);
+        const expandAnimation = ctrld.animate([
+            { height: "0px" },
+            { height: `${contentHeight}px` }
+        ], animOptions);
+        expandAnimation.onfinish = () => {
+            ctrld.style.height = "auto"; // Ensure element expands to its full height after animation finishes
+        };
+    }
+}
+	itemAction(e) {
+    const { target } = e;
+    const action = target?.getAttribute("data-action");
+    const item = target?.getAttribute("data-item");
+
+    if (action) {
+        const targetExpanded = action === "expand" ? "false" : "true";
+        const buttons = Array.from(this.el?.querySelectorAll(`[aria-expanded="${targetExpanded}"]`));
+        const wasExpanded = action === "collapse";
+
+        buttons.forEach((button) => {
+            const buttonID = button.getAttribute("data-item");
+            const ctrld = this.el?.querySelector(`#item${buttonID}-ctrld`);
+            const contentHeight = ctrld.firstElementChild?.offsetHeight;
+
+            this.animateItemAction(button, ctrld, contentHeight, wasExpanded);
+        });
+    } else if (item) {
+        const button = this.el?.querySelector(`[data-item="${item}"]`);
+        const expanded = button?.getAttribute("aria-expanded");
+
+        if (!expanded) return;
+
+        const wasExpanded = expanded === "true";
+        const ctrld = this.el?.querySelector(`#item${item}-ctrld`);
+        const contentHeight = ctrld.firstElementChild?.offsetHeight;
+
+        this.animateItemAction(button, ctrld, contentHeight, wasExpanded);
+        }
+    }
+}
+</script>
+</body>
+</html>

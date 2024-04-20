@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    li {
+        list-style: none;
+        color: white;
+        font-size: 1rem;
+        border-radius: 10px;
+    }
+
+    body {
+        background-color: white;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+        font-size: 1rem;
+        
+    }
+
+
+
+    header {
+
+        top: 0;
+
+        padding: 0 2rem;
+        background-color: #212529;
+    }
+
+    .navbar {
+        width: 100%;
+        height: 60px;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .navbar .logo a {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .navbar .links {
+        display: flex;
+        flex-direction:row ;
+        align-items: center ;
+        gap: 2rem;
+    }
+
+    .navbar .toggle_btn {
+        color: #ffffff;
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: none;
+    }
+
+    .dropdown_menu {
+        position: absolute;
+        right: 2rem;
+        top: 60px;
+        height: 0;
+        width: calc(100% - 4rem);
+        background-color: rgba(255, 255, 255);
+        backdrop-filter: blur(15px);
+        border-radius: 10px;
+        overflow: hidden;
+        transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .dropdown_menu li {
+        padding: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dropdown_menu.open {
+    height: 380px;
+
+    z-index: 1;
+}
+
+    .dropdown-wrapper {
+            position: relative;
+            min-width: 200px;
+            font-size: 15px;
+        }
+        .dropdown-btn {
+            padding: 8px 10px;
+            background-color: none;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+
+        }
+        .dropdown_menu1 {
+    position: absolute;
+    right: 0;
+    width: 100%;
+    margin-top: 5px;
+    padding: 5px 0;
+    background-color: #faf9f9;
+    border-radius: 5px;
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: top right;
+    transition: transform 0.3s cubic-bezier(0.165,0.84, 0.44, 1), opacity 0.3s ease-in-out;
+    z-index: 1000; /* Назначаем высокий z-index, чтобы выпадающее меню было поверх остального содержимого */
+}
+
+.dropdown_menu1.open {
+    opacity: 1;
+    transform: scale(1); /* Сдвигаем выпадающее меню на 5px вниз, чтобы оно не перекрывалось */
+}
+        .dropdown_menu1 .item {
+            padding: 8px 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .dropdown_menu1 .item:hover {
+            background-color: white;
+        }
+        .dropdown_menu1 .item:active {
+            font-weight: bold;
+        }
+
+    @media (max-width: 992px) {
+        .navbar .links,
+        .navbar .action_btn {
+            display: none;
+        }
+
+        .navbar .toggle_btn {
+            display: block;
+        }
+
+        .dropdown_menu {
+            display: block;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .dropdown_menu {
+            left: 2rem;
+            width: unset;
+        }
+    }
+
+
+
+
+
+    /*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --first-color: hsl(230, 75%, 56%);
+  --title-color: hsl(230, 75%, 15%);
+  --text-color: hsl(230, 12%, 40%);
+  --body-color: hsl(230, 100%, 98%);
+  --container-color: hsl(230, 100%, 97%);
+  --border-color: hsl(230, 25%, 80%);
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Syne", sans-serif;
+  --h2-font-size: 1.25rem;
+  --normal-font-size: .938rem;
+
+  /*========== Font weight ==========*/
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+
+  /*========== z index ==========*/
+  --z-fixed: 100;
+  --z-modal: 1000;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 1023px) {
+  :root {
+    --h2-font-size: 1.5rem;
+    --normal-font-size: 1rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+input,
+button {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
+body {
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+
+input,
+button {
+  border: none;
+  outline: none;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1120px;
+  margin-inline: 1.5rem;
+}
+
+.main {
+  position: relative;
+  height: 100vh;
+}
+
+.main__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -1;
+}
+
+.search,
+.login {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-modal);
+  background-color: hsla(230, 75%, 15%, .1);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px); /* For safari */
+  padding: 8rem 1.5rem 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s;
+}
+
+.search__close,
+.login__close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 1.5rem;
+  color: var(--title-color);
+  cursor: pointer;
+}
+
+/*=============== HEADER & NAV ===============*/
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--body-color);
+  box-shadow: 0 2px 16px hsla(230, 75%, 32%, .15);
+  z-index: var(--z-fixed);
+}
+
+.nav {
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav__logo {
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+  transition: color .4s;
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+.nav__search,
+.nav__login,
+.nav__toggle,
+.nav__close {
+  font-size: 1.25rem;
+  color: var(--title-color);
+  cursor: pointer;
+  transition: color .4s;
+}
+
+:is(.nav__logo, .nav__search, .nav__login, .nav__toggle, .nav__link):hover {
+  color: var(--first-color);
+}
+
+/* Navigation for mobile devices */
+@media screen and (max-width: 1023px) {
+  .nav__menu {
+    position: fixed;
+    top: -100%;
+    left: 0;
+    background-color: var(--body-color);
+    box-shadow: 0 8px 16px hsla(230, 75%, 32%, .15);
+    width: 100%;
+    padding-block: 4.5rem 4rem;
+    transition: top .4s;
+  }
+}
+
+.nav__list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.5rem;
+  text-align: center;
+}
+
+.nav__link {
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+  transition: color .4s;
+}
+
+.nav__close {
+  position: absolute;
+  top: 1.15rem;
+  right: 1.5rem;
+}
+
+/* Show menu */
+.show-menu {
+  top: 0;
+}
+
+/*=============== SEARCH ===============*/
+.search__form {
+  display: flex;
+  align-items: center;
+  column-gap: .5rem;
+  background-color: var(--container-color);
+  box-shadow: 0 8px 32px hsla(230, 75%, 15%, .2);
+  padding-inline: 1rem;
+  border-radius: .5rem;
+  transform: translateY(-1rem);
+  transition: transform .4s;
+}
+
+.search__icon {
+  font-size: 1.25rem;
+  color: var(--title-color);
+}
+
+.search__input {
+  width: 100%;
+  padding-block: 1rem;
+  background-color: var(--container-color);
+  color: var(--text-color);
+}
+
+.search__input::placeholder {
+  color: var(--text-color);
+}
+
+/* Show search */
+.show-search {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.show-search .search__form {
+  transform: translateY(0);
+}
+
+/*=============== LOGIN ===============*/
+.login__form,
+.login__group {
+  display: grid;
+}
+
+.login__form {
+  background-color: var(--container-color);
+  padding: 2rem 1.5rem 2.5rem;
+  box-shadow: 0 8px 32px hsla(230, 75%, 15%, .2);
+  border-radius: 1rem;
+  row-gap: 1.25rem;
+  text-align: center;
+  transform: translateY(-1rem);
+  transition: transform .4s;
+}
+
+.login__title {
+  font-size: var(--h2-font-size);
+  color: var(--title-color);
+}
+
+.login__group {
+  row-gap: 1rem;
+}
+
+.login__label {
+  display: block;
+  text-align: initial;
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+  margin-bottom: .25rem;
+}
+
+.login__input {
+  width: 100%;
+  background-color: var(--container-color);
+  border: 2px solid var(--border-color);
+  padding: 1rem;
+  border-radius: .5rem;
+  color: var(--text-color);
+}
+
+.login__input::placeholder {
+  color: var(--text-color);
+}
+
+.login__signup {
+  margin-bottom: .5rem;
+}
+
+.login__signup a {
+  color: var(--first-color);
+}
+
+.login__forgot {
+  display: inline-block;
+  color: var(--first-color);
+  margin-bottom: 1.25rem;
+}
+
+.login__button {
+  display: inline-block;
+  background-color: var(--first-color);
+  width: 100%;
+  color: #fff;
+  font-weight: var(--font-semi-bold);
+  padding: 1rem;
+  border-radius: .5rem;
+  cursor: pointer;
+  transition: box-shadow .4s;
+}
+
+.login__button:hover {
+  box-shadow: 0 4px 24px hsla(230, 75%, 40%, .4);
+}
+
+/* Show login */
+.show-login {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.show-login .login__form {
+  transform: translateY(0);
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For medium devices */
+@media screen and (min-width: 576px) {
+  .search,
+  .login {
+    padding-top: 10rem;
+  }
+
+  .search__form {
+    max-width: 450px;
+    margin-inline: auto;
+  }
+
+  .search__close,
+  .login__close {
+    width: max-content;
+    top: 5rem;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    font-size: 2rem;
+  }
+
+  .login__form {
+    max-width: 400px;
+    margin-inline: auto;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1023px) {
+  .nav {
+    height: calc(var(--header-height) + 2rem);
+    column-gap: 3rem;
+  }
+  .nav__close,
+  .nav__toggle {
+    display: none;
+  }
+  .nav__menu {
+    margin-left: auto;
+  }
+  .nav__list {
+    flex-direction: row;
+    column-gap: 3rem;
+  }
+
+  .login__form {
+    padding: 3rem 2rem 3.5rem;
+  }
+}
+
+@media screen and (min-width: 1150px) {
+  .container {
+    margin-inline: auto;
+  }
+}
+</style>
+</head>
+<body>
+<header>
+    <div class="navbar">
+        <div class="logo"><a href="{% url 'home' %}"><img width="50" height="50" src="https://mario.wiki.gallery/images/b/b8/SMBW_Yoshi.png"></a></div>
+        <ul class="links">
+            <li><div class="dropdown-wrapper">
+        <div class="dropdown-btn">
+            <span style="align-items: center; text-align: center;">Криптография<i style="text-indent: 10px;" class="fa-solid fa-caret-down"></i></span>
+        </div>
+        <div style="align-items: center; background-color: #212529" class="dropdown_menu1">
+            <div class="item active"><a href="{% url 'blockchain' %}">Блокчейн</a></div>
+            <div class="item"><a href="{% url 'defi' %}">Defi</a></div>
+            <div class="item"><a href="{% url 'exchanges' %}">Обмены</a></div>
+            <div class="item"><a href="{% url 'coins' %}">Токены</a></div>
+            <div class="item"><a href="{% url 'solidity' %}">Solidity</a></div>
+        </div></div></li>
+        <li><div class="dropdown-wrapper">
+            <div class="dropdown-btn">
+                <span style="align-items: center; text-align: center;">Финансы<i style="text-indent: 10px;" class="fa-solid fa-caret-down"></i></span>
+            </div>
+            <div style="align-items: center; background-color: #212529" class="dropdown_menu1">
+               <div class="item"><a href="{% url 'money' %}">Деньги</a></div>
+            </div></div></li>
+            <li><a style="
+        text-decoration: none;
+        color: white;
+        font-size: 1rem;
+    " href="/home/posts/">Посты</a></li>
+            <li><div class="nav__actions">
+                <a><i style="color:white" class="ri-search-line nav__search" id="search-btn"></i></a>
+            </div>
+        </li>
+        </ul>
+
+        <div class="toggle_btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+
+    <div style="align-items: center; background-color: #212529" class="dropdown_menu">
+        <ul>
+            <li><div style="align-items: center; background-color: #212529" class="dropdown-wrapper">
+                    <div class="dropdown-btn">
+                        <span style="margin-left: 30%; align-items: center; background-color: #212529">Финансы<i style="text-indent: 10px;" class="fa-solid fa-caret-down"></i></span>
+                    </div>
+
+                    <div style="align-items: center; background-color: #33393f" class="dropdown_menu1">
+                        <div class="item active"><a href="{% url 'money' %}">Деньги</a></div>
+                    </div></div></li>
+            <li ><div style="align-items: center;" class="dropdown-wrapper">
+                <div style="align-items: center;"  class="dropdown-btn">
+                    <span style="margin-left: 25%;">Криптография<i style="text-indent: 10px;" class="fa-solid fa-caret-down"></i></span>
+                </div>
+                <div style="align-items: center; background-color: #33393f" class="dropdown_menu1">
+                    <div class="item active"><a href="{% url 'blockchain' %}">Блокчейн</a></div>
+                    <div class="item"><a href="{% url 'defi' %}">Defi</a></div>
+                    <div class="item"><a href="{% url 'exchanges' %}">Обмены</a></div>
+                    <div class="item"><a href="{% url 'coins' %}">Токены</a></div>
+                    <div class="item"><a href="{% url 'solidity' %}">Solidity</a></div>
+                </div></div></li>
+
+            <li><a style="
+        text-decoration: none;
+        color: white;
+        font-size: 1rem;" href="/home/posts/">Посты</a></li>
+            <li><div style="align-items: center; color: white" class="nav__actions">
+               <i style="color:white" class="ri-search-line nav__search" id="search-btn"></i>
+            </div></li>
+        </ul>
+
+    </div>
+</header>
+<div class="search" id="search">
+     <form action="{% url 'posts' %}" method="post" class="search__form">
+         {% csrf_token %}
+        <i class="ri-search-line search__icon"></i>
+        <input name="search" placeholder="Что вы ищете?" class="search__input" type="search" value="{{ search }}" required>
+     </form>
+     <i class="ri-close-line search__close" id="search-close"></i>
+</div>
+<script>
+/=============== SEARCH ===============/
+const search = document.getElementById('search'),
+      searchBtns = document.querySelectorAll('#search-btn'), // Selecting all elements with id 'search-btn'
+      searchClose = document.getElementById('search-close');
+
+/* Search show */
+searchBtns.forEach(btn => {
+   btn.addEventListener('click', () =>{
+      search.classList.add('show-search');
+   });
+});
+
+/* Search hidden */
+searchClose.addEventListener('click', () =>{
+   search.classList.remove('show-search');
+});
+
+/=============== LOGIN ===============/
+const login = document.getElementById('login'),
+      loginBtn = document.getElementById('login-btn'),
+      loginClose = document.getElementById('login-close');
+
+/* Login show */
+loginBtn.addEventListener('click', () =>{
+   login.classList.add('show-login');
+});
+
+/* Login hidden */
+loginClose.addEventListener('click', () =>{
+   login.classList.remove('show-login');
+});
+
+</script>
+<script>
+    const toggleBtn = document.querySelector('.toggle_btn');
+    const toggleBtnIcon = document.querySelector('.toggle_btn i');
+    const dropDownMenu = document.querySelector('.dropdown_menu');
+    toggleBtn.onclick = function () {
+        dropDownMenu.classList.toggle('open');
+        const isOpen = dropDownMenu.classList.contains('open');
+
+        toggleBtnIcon.className = isOpen
+            ? 'fas fa-times'
+            : 'fas fa-bars';
+    };
+
+    var dropdownBtns = document.querySelectorAll('.dropdown-btn');
+    dropdownBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            this.nextElementSibling.classList.toggle('open');
+        });
+    });
+
+const navMenu = document.getElementById('nav-menu'),
+      navToggle = document.getElementById('nav-toggle'),
+      navClose = document.getElementById('nav-close');
+
+/* Menu show */
+navToggle.addEventListener('click', () =>{
+   navMenu.classList.add('show-menu');
+});
+
+/* Menu hidden */
+navClose.addEventListener('click', () =>{
+   navMenu.classList.remove('show-menu');
+});
+</script>
+
+
+</body>
+</html>
